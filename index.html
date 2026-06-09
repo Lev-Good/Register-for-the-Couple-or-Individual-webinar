@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרשמה לוובינר - המפה הזוגית</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-green: #5c6b62;
+            --brand-dark: #2c3e50;
+            --brand-text: #34495e;
+            --brand-action: #9b2222;
+            --brand-action-hover: #7a1a1a;
+            --bg-color: #f3f4f6;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Assistant', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background-color: #ffffff;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card-header-line {
+            height: 5px;
+            background-color: var(--brand-green);
+        }
+
+        .card-content {
+            padding: 40px;
+        }
+
+        .bsd {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 250px;
+            height: auto;
+        }
+
+        h1 {
+            color: var(--brand-dark);
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.35;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: var(--brand-text);
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .benefits {
+            background-color: #fafbfb;
+            border: 1px solid #eef2f6;
+            border-right: 4px solid var(--brand-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .benefits h3 {
+            color: var(--brand-dark);
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .benefits ul {
+            color: var(--brand-text);
+            font-size: 17px;
+            line-height: 1.6;
+            padding-right: 20px;
+            margin: 0;
+        }
+
+        .benefits li {
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: var(--brand-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Assistant', sans-serif;
+            box-sizing: border-box;
+            background-color: #f8fafc;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(92, 107, 98, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--brand-action);
+            color: #ffffff;
+            border: none;
+            border-radius: 40px;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(155, 34, 34, 0.25);
+            transition: all 0.3s;
+            font-family: 'Assistant', sans-serif;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--brand-action-hover);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .success-icon {
+            color: var(--brand-green);
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eef2f6;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* התאמה למובייל */
+        @media (max-width: 480px) {
+            .card-content { padding: 25px 15px; }
+            h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header-line"></div>
+        
+        <div class="card-content" id="formContainer">
+            <div class="bsd">בס"ד</div>
+            
+            <div class="logo">
+                <img src="https://www.pulseem.co.il/Pulseem/ClientImages/20175/%D7%99%D7%95%D7%91%D7%9C-%D7%A1%D7%95%D7%93%D7%90%D7%99-PNG.png" alt="יובל סודאי">
+            </div>
+
+            <h1>וובינר מיוחד: "המפה הזוגית"</h1>
+            <p class="subtitle">הצטרפו למפגש מרתק וללא עלות בו נגלה מה באמת מחזיק זוגיות יציבה, חזקה ובטוחה לאורך זמן – גם כשהחיים מורכבים.</p>
+
+            <div class="benefits">
+                <h3>במפגש נלמד:</h3>
+                <ul>
+                    <li>מהם שני המרכיבים שבונים את <strong>"השלד הזוגי"</strong>?</li>
+                    <li>איך מתמודדים נכון עם פערי הצלחה וחוסר ביטחון בקשר?</li>
+                    <li>כלים מעשיים ליצירת נוכחות, אחריות ויציבות פנימית.</li>
+                </ul>
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">שם מלא</label>
+                    <input type="text" id="name" name="name" required placeholder="הכנס/י שם מלא">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">כתובת אימייל</label>
+                    <input type="email" id="email" name="email" required placeholder="name@example.com" dir="ltr">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">מספר טלפון (אופציונלי)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="05X-XXXXXXX" dir="ltr">
+                </div>
+
+                <button type="submit" id="submitBtn">להרשמה למפגש ללא עלות — לחצו כאן</button>
+            </form>
+            
+            <div class="footer">
+                * קישור לוובינר יישלח לתיבת המייל בסמוך לאירוע. נתוניכם שמורים ומאובטחים.
+            </div>
+        </div>
+
+        <div class="card-content success-message" id="successContainer">
+            <div class="bsd">בס"ד</div>
+            <div class="logo">
+                <img src="https://www.pulseem.co.il/Pulseem/ClientImages/20175/%D7%99%D7%95%D7%91%D7%9C-%D7%A1%D7%95%D7%93%D7%90%D7%99-PNG.png" alt="יובל סודאי">
+            </div>
+            <div class="success-icon">✓</div>
+            <h1>נרשמת בהצלחה!</h1>
+            <p class="subtitle" style="font-size: 20px;">מקומך בוובינר "המפה הזוגית" הובטח.</p>
+            <p class="subtitle">פרטי ההתחברות והנחיות נוספות יישלחו לכתובת האימייל שהזנת בסמוך למועד המפגש.<br>נשמח לראותכם!</p>
+        </div>
+    </div>
+
+    <script>
+        // *** כאן יש להדביק את כתובת ה-Web App של גוגל סקריפט ***
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz47aZRr16PGQ56qR8N6rGOPOBW-j0tEioDH9oK0nDVrj-umi4B2egXiBnHCo6FGdeEvQ/exec';
+        
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formContainer = document.getElementById('formContainer');
+        const successContainer = document.getElementById('successContainer');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // שינוי סטטוס כפתור בזמן שליחה
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'שומר את מקומך...';
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(form),
+                mode: 'no-cors' // קריטי לעבודה מול גוגל שיטס ללא שגיאות CORS
+            })
+            .then(response => {
+                // העלמת הטופס והצגת חלונית התודה
+                formContainer.style.display = 'none';
+                successContainer.style.display = 'block';
+            })
+            .catch(error => {
+                alert('אירעה שגיאה בחיבור, אנא נסו שנית.');
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'להרשמה למפגש ללא עלות — לחצו כאן';
+            });
+        });
+    </script>
+</body>
+</html>
