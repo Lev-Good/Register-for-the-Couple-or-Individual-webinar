@@ -15,7 +15,7 @@
             --brand-green-hover: #4a564f;
             --brand-dark: #2c3e50;
             --brand-text: #34495e;
-            --bg-page: #f4f6f5; /* רקע ירקרק-אפרפר עדין מאוד המותאם למותג */
+            --bg-page: #f4f6f5;
             --bg-card: #ffffff;
             --card-shadow: 0 20px 40px rgba(44, 62, 80, 0.06);
             --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -36,7 +36,7 @@
             padding: 0;
         }
 
-        /* מנגנון אנימציית חשיפה בגלילה (Scroll Reveal) */
+        /* מנגנון אנימציית חשיפה בגלילה */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -67,7 +67,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* מיכל מרכזי המגביל את הרוחב ומעניק מראה של מכתב/דף יוקרתי */
+        /* מעטפת מרכזית */
         .main-wrapper {
             max-width: 700px;
             width: 100%;
@@ -75,7 +75,7 @@
             padding: 0 20px;
         }
 
-        /* הלוגו המרכזי הגדול */
+        /* לוגו מרכזי */
         .logo-container {
             text-align: center;
             padding: 20px 0;
@@ -122,7 +122,7 @@
             font-weight: 400;
         }
 
-        /* תצוגת כרטיסיות המידע (השלד הזוגי) */
+        /* תצוגת כרטיסיות המידע */
         .content-section {
             margin-bottom: 50px;
         }
@@ -201,7 +201,7 @@
             font-size: 15px;
         }
 
-        /* הגדרת 16px מונעת זום אוטומטי לא רצוי בדפדפני מובייל של אפל */
+        /* מונע זום אוטומטי במובייל של אפל */
         .form-group input {
             width: 100%;
             padding: 15px 18px;
@@ -220,7 +220,7 @@
             box-shadow: 0 0 0 4px rgba(92, 107, 98, 0.12);
         }
 
-        /* כפתור הרשמה עם חיווי ואנימציית פעימה למשיכת קליקים */
+        /* כפתור הרשמה */
         .submit-btn {
             width: 100%;
             padding: 18px;
@@ -256,7 +256,7 @@
             animation: none;
         }
 
-        /* מסך הצלחה פנימי וחלק */
+        /* מסך הצלחה */
         .success-box {
             display: none;
             text-align: center;
@@ -278,7 +278,6 @@
             box-shadow: 0 10px 20px rgba(92, 107, 98, 0.2);
         }
 
-        /* הגדרות קבועות לאנימציות ה-Keyframes */
         @keyframes softPulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.03); opacity: 0.95; }
@@ -302,7 +301,6 @@
             font-size: 14px;
         }
 
-        /* התאמות רספונסיביות קריטיות למובייל ומסכים קטנים */
         @media (max-width: 600px) {
             body { padding: 0 5px; }
             .main-wrapper { margin-top: 5px; padding: 0 10px; }
@@ -332,30 +330,30 @@
         </div>
 
         <section class="hero reveal delay-1">
-            <div class="date-tag">יום רביעי הקרוב — וובינר פתוח לקהל הרחב</div>
-            <h1>כשהיא מצליחה מאוד – והוא מתחיל לאבד ביטחון: מה באמת מחזיק את הזוגיות?</h1>
-            <p>אני מזמין אתכם להצטרף אלינו, ללמוד את המבנה העמוק של הקשר הזוגי, ולגלות מה באמת יוצר ביטחון, קרבה ויציבות – גם כשהחיים רחוקים מלהיות מושלמים.</p>
+            <div class="date-tag">יום רביעי, פרשת חוקת, ב' בתמוז — וובינר פתוח לקהל הרחב</div>
+            <h1>המפה הזוגית: לפצח את סוד החיבור והיציבות בקשר</h1>
+            <p>עולם הזוגיות מציב בפנינו אתגרים לא מעטים. אני מזמין אתכם להצטרף אלינו למפגש מיוחד, בו נלמד צעד אחר צעד כיצד לקרוא נכון את המפה הזוגית שלכם, ונגלה כלים מעשיים לבניית עוגן פנימי ויציבות ארוכת טווח.</p>
         </section>
 
         <section class="content-section">
-            <h2 class="section-title reveal">שני מרכיבים מרכזיים בונים את השלד הזוגי:</h2>
+            <h2 class="section-title reveal">מה נלמד בוובינר?</h2>
             
             <div class="info-card reveal">
-                <h3>1. השתדלות ואחריות</h3>
-                <p>שאישה תרגיש שבעלה נוכח, משתדל ולוקח אחריות על מקומו בבית ובמשפחה.</p>
+                <h3>בניית עוגן פנימי ויציב</h3>
+                <p>איך יוצרים מרחב בטוח ושקט בבית, המאפשר לשני בני הזוג לצמוח, להתמודד עם אתגרים ולבנות אמון עמוק שלא מתערער.</p>
             </div>
             
             <div class="info-card reveal delay-1">
-                <h3>2. יציבות פנימית</h3>
-                <p>גם כאשר יש חולשות, קשיים או פחדים. אישה זקוקה להרגיש שיש מולה אדם שלא מאבד את הערך העצמי שלו בגלל ההצלחה שלה, ושאפשר להישען עליו כשצריך.</p>
+                <h3>שותפות ואחריות בדרך</h3>
+                <p>נבין לעומק את מבנה הקשר, כיצד לזהות את הצרכים הרגשיים זה של זו, ואיך להפוך פערים לבסיס של בניין קשר איתן וקרוב.</p>
             </div>
         </section>
 
         <section class="form-card reveal">
             
             <div id="formContent">
-                <h2>הסדנה החדשה שלנו — "המפה הזוגית"</h2>
-                <p class="subtitle">המפגש הראשון יהיה פתוח לקהל הרחב ויתקיים בוובינר מיוחד ביום רביעי הקרוב. הבטיחו את מקומכם כעת.</p>
+                <h2>הבטיחו את מקומכם בוובינר</h2>
+                <p class="subtitle">המפגש יתקיים ביום רביעי, פרשת חוקת, ב' בתמוז. הירשמו כעת ללא עלות.</p>
                 
                 <form id="regForm">
                     <div class="form-group">
@@ -376,7 +374,7 @@
                 <div class="success-icon">✓</div>
                 <h2 style="color: var(--brand-dark); margin-bottom: 5px;">נרשמתם בהצלחה!</h2>
                 <p style="font-size: 18px; color: var(--brand-text); margin-bottom: 12px;">שמרנו לכם מקום בוובינר "המפה הזוגית".</p>
-                <p style="font-size: 15.5px; color: var(--brand-text); font-weight: 300;">קישור הכניסה הייחודי למערכת והנחיות התחברות יישלחו לכתובת המייל שלכם בסמוך למועד המפגש ביום רביעי הקרוב. נתראה!</p>
+                <p style="font-size: 15.5px; color: var(--brand-text); font-weight: 300;">קישור הכניסה האישי והנחיות יסלחו לכתובת המייל שלכם בסמוך למועד המפגש ביום רביעי, פרשת חוקת, ב' בתמוז. נתראה!</p>
             </div>
 
         </section>
@@ -388,7 +386,7 @@
     </div>
 
     <script>
-        // הפעלת אנימציות החשיפה בעת גלילה (Scroll Reveal) בצורה חלקה במובייל ובמחשב
+        // הפעלת אנימציות החשיפה בעת גלילה
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -399,7 +397,7 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // ניהול שליחת המידע ישירות ל-Google Sheets
+        // ניהול שליחת המידע לטופס
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz47aZRr16PGQ56qR8N6rGOPOBW-j0tEioDH9oK0nDVrj-umi4B2egXiBnHCo6FGdeEvQ/exec';
         const form = document.getElementById('regForm');
         const btn = document.getElementById('btnSubmit');
@@ -418,7 +416,6 @@
                 mode: 'no-cors'
             })
             .then(() => {
-                // מעבר ויזואלי חלק אל מסך ההצלחה
                 formContent.style.display = 'none';
                 successContent.style.display = 'block';
             })
