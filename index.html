@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>המפה הזוגית — הרשמה לוובינר | יובל סודאי</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,14 +11,14 @@
     
     <style>
         :root {
-            --color-green: #5c6b62;
-            --color-green-light: #f4f6f5;
-            --color-dark: #2c3e50;
-            --color-text: #34495e;
-            --color-muted: #94a3b8;
-            --color-action: #9b2222;
-            --color-action-hover: #7a1a1a;
-            --bg-main: #fafaf9; /* רקע שמנת-אומנותי עדין */
+            --brand-green: #5c6b62; 
+            --brand-green-hover: #4a564f;
+            --brand-dark: #2c3e50;
+            --brand-text: #34495e;
+            --bg-page: #f4f6f5; /* רקע ירקרק-אפרפר עדין מאוד המותאם למותג */
+            --bg-card: #ffffff;
+            --card-shadow: 0 20px 40px rgba(44, 62, 80, 0.06);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -29,18 +29,18 @@
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--color-text);
+            background-color: var(--bg-page);
+            color: var(--brand-text);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
+            padding: 0;
         }
 
-        /* סגנון כללי לאנימציות גלילה */
+        /* מנגנון אנימציית חשיפה בגלילה (Scroll Reveal) */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                        transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
         }
 
         .reveal.active {
@@ -48,182 +48,145 @@
             transform: translateY(0);
         }
 
-        .delay-1 { transition-delay: 0.2s; }
-        .delay-2 { transition-delay: 0.4s; }
-        .delay-3 { transition-delay: 0.6s; }
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
 
-        /* שורת יציבות עליונה */
+        /* אזור עליון - בס"ד */
         .top-bar {
-            height: 4px;
-            background-color: var(--color-green);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        header {
-            padding: 30px 20px;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px 20px 0 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: flex-start;
         }
 
         .bsd {
-            color: var(--color-muted);
+            color: #94a3b8;
             font-size: 14px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        .logo img {
-            max-width: 200px;
-            height: auto;
-        }
-
-        /* אזור הירו (Hero Section) */
-        .hero {
-            max-width: 900px;
-            margin: 60px auto 100px auto;
-            text-align: center;
+        /* מיכל מרכזי המגביל את הרוחב ומעניק מראה של מכתב/דף יוקרתי */
+        .main-wrapper {
+            max-width: 700px;
+            width: 100%;
+            margin: 10px auto 60px auto;
             padding: 0 20px;
         }
 
-        .hero h1 {
-            color: var(--color-dark);
-            font-size: 46px;
+        /* הלוגו המרכזי הגדול */
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logo-img {
+            max-width: 100%;
+            width: 380px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.02));
+        }
+
+        /* תוכן ראשון - כותרת הוובינר */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* תגית דינמית עם אנימציית פעימה רכה */
+        .date-tag {
+            display: inline-block;
+            background-color: #eef2f0;
+            color: var(--brand-green);
+            padding: 6px 18px;
+            border-radius: 20px;
             font-weight: 800;
-            line-height: 1.25;
+            font-size: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(92, 107, 98, 0.15);
+            animation: softPulse 2s infinite ease-in-out;
+        }
+
+        .hero h1 {
+            color: var(--brand-dark);
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1.35;
             margin-bottom: 25px;
-            letter-spacing: -0.5px;
         }
 
         .hero p {
-            font-size: 22px;
-            color: var(--color-text);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            font-weight: 300;
+            font-size: 19px;
+            color: var(--brand-text);
+            font-weight: 400;
         }
 
-        .cta-scroll-btn {
-            display: inline-block;
-            padding: 14px 35px;
-            background-color: transparent;
-            color: var(--color-green);
-            border: 2px solid var(--color-green);
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cta-scroll-btn:hover {
-            background-color: var(--color-green);
-            color: white;
-        }
-
-        /* חלק אומנותי: הצגת ה"שלד הזוגיות" */
-        .concept-section {
-            background-color: var(--color-green-light);
-            padding: 100px 20px;
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .section-container {
-            max-width: 1000px;
-            margin: 0 auto;
+        /* תצוגת כרטיסיות המידע (השלד הזוגי) */
+        .content-section {
+            margin-bottom: 50px;
         }
 
         .section-title {
             text-align: center;
-            color: var(--color-dark);
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 60px;
-        }
-
-        .grid {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .concept-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 40px;
-            flex: 1;
-            min-width: 280px;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            border-right: 5px solid var(--color-green);
-            position: relative;
-        }
-
-        .concept-card h3 {
-            color: var(--color-dark);
             font-size: 22px;
             font-weight: 800;
-            margin-bottom: 15px;
+            color: var(--brand-dark);
+            margin-bottom: 25px;
         }
 
-        .concept-card p {
+        .info-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            border-right: 5px solid var(--brand-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: scale(1.01) translateY(-2px);
+            box-shadow: 0 25px 50px rgba(44, 62, 80, 0.08);
+        }
+
+        .info-card h3 {
+            color: var(--brand-dark);
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .info-card p {
             font-size: 17px;
-            color: var(--color-text);
-            line-height: 1.7;
+            color: var(--brand-text);
+            line-height: 1.65;
         }
 
-        /* אזור הטופס המרכזי */
-        .registration-section {
-            padding: 100px 20px;
-            display: flex;
-            justify-content: center;
-        }
-
+        /* כרטיסיית הטופס */
         .form-card {
-            background-color: #ffffff;
-            max-width: 650px;
-            width: 100%;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(44, 62, 80, 0.05);
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 45px 35px;
+            box-shadow: var(--card-shadow);
             border: 1px solid #eef2f6;
-            padding: 50px;
             position: relative;
-        }
-
-        .form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background-color: var(--color-action);
-            border-radius: 0 0 4px 4px;
+            overflow: hidden;
         }
 
         .form-card h2 {
-            color: var(--color-dark);
-            font-size: 30px;
-            font-weight: 800;
+            color: var(--brand-dark);
+            font-size: 26px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-weight: 800;
         }
 
-        .form-card .form-subtitle {
+        .form-card p.subtitle {
             text-align: center;
-            color: var(--color-text);
+            margin-bottom: 35px;
             font-size: 17px;
-            margin-bottom: 40px;
+            color: var(--brand-text);
         }
 
         .form-group {
@@ -232,48 +195,53 @@
 
         .form-group label {
             display: block;
-            color: var(--color-dark);
+            color: var(--brand-dark);
             font-weight: 600;
             margin-bottom: 8px;
             font-size: 15px;
         }
 
+        /* הגדרת 16px מונעת זום אוטומטי לא רצוי בדפדפני מובייל של אפל */
         .form-group input {
             width: 100%;
-            padding: 16px 20px;
+            padding: 15px 18px;
             border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            font-size: 16px;
-            background-color: #f8fafc;
+            border-radius: 10px;
+            font-size: 16px; 
+            background: #fafbfb;
             transition: all 0.3s ease;
+            -webkit-appearance: none;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: var(--color-green);
-            background-color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(92, 107, 98, 0.1);
+            border-color: var(--brand-green);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(92, 107, 98, 0.12);
         }
 
+        /* כפתור הרשמה עם חיווי ואנימציית פעימה למשיכת קליקים */
         .submit-btn {
             width: 100%;
-            padding: 20px;
-            background-color: var(--color-action);
+            padding: 18px;
+            background: var(--brand-green);
             color: #ffffff;
             border: none;
-            border-radius: 50px;
-            font-size: 20px;
+            border-radius: 10px;
+            font-size: 19px;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(155, 34, 34, 0.25);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-top: 15px;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(92, 107, 98, 0.2);
+            animation: pulseBtn 2.5s infinite;
         }
 
         .submit-btn:hover {
-            background-color: var(--color-action-hover);
+            background: var(--brand-green-hover);
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(155, 34, 34, 0.35);
+            box-shadow: 0 12px 25px rgba(92, 107, 98, 0.3);
         }
 
         .submit-btn:active {
@@ -281,186 +249,183 @@
         }
 
         .submit-btn:disabled {
-            background-color: var(--color-muted);
+            background: #cbd5e1;
+            box-shadow: none;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
+            animation: none;
         }
 
-        /* מסך הצלחה מעוצב */
-        .success-view {
+        /* מסך הצלחה פנימי וחלק */
+        .success-box {
             display: none;
             text-align: center;
-            padding: 40px 0;
-            animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            padding: 30px 10px;
+            animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
-        .success-checkmark {
-            width: 80px;
-            height: 80px;
-            background-color: var(--color-green-light);
-            color: var(--color-green);
-            font-size: 40px;
-            line-height: 80px;
+        .success-icon {
+            width: 75px;
+            height: 75px;
+            background: var(--brand-green);
+            color: white;
+            font-size: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            margin: 0 auto 30px auto;
-            font-weight: bold;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 10px 20px rgba(92, 107, 98, 0.2);
         }
 
-        @keyframes scaleUp {
-            from { opacity: 0; transform: scale(0.96); }
+        /* הגדרות קבועות לאנימציות ה-Keyframes */
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(92, 107, 98, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(92, 107, 98, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(92, 107, 98, 0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--color-muted);
+            padding: 30px 20px;
+            color: #94a3b8;
             font-size: 14px;
-            border-top: 1px solid #eef2f6;
-            background-color: #ffffff;
         }
 
-        /* התאמה מלאה למובייל */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 34px; }
-            .hero p { font-size: 18px; }
-            .form-card { padding: 30px 20px; }
-            .grid { flex-direction: column; align-items: center; }
-            .concept-card { max-width: 100%; width: 100%; }
+        /* התאמות רספונסיביות קריטיות למובייל ומסכים קטנים */
+        @media (max-width: 600px) {
+            body { padding: 0 5px; }
+            .main-wrapper { margin-top: 5px; padding: 0 10px; }
+            .logo-img { width: 290px; }
+            .hero h1 { font-size: 26px; margin-bottom: 15px; }
+            .hero p { font-size: 17px; }
+            .info-card { padding: 22px 20px; }
+            .info-card h3 { font-size: 18px; }
+            .info-card p { font-size: 15.5px; }
+            .form-card { padding: 35px 20px; }
+            .form-card h2 { font-size: 22px; }
+            .form-card p.subtitle { font-size: 15px; margin-bottom: 25px; }
+            .submit-btn { font-size: 17px; padding: 16px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar"></div>
-
-    <header>
+    <div class="top-bar">
         <div class="bsd">בס"ד</div>
-        <div class="logo">
-            <img src="https://www.pulseem.co.il/Pulseem/ClientImages/20175/%D7%99%D7%95%D7%91%D7%9C-%D7%A1%D7%95%D7%93%D7%90%D7%99-PNG.png" alt="יובל סודאי">
-        </div>
-    </header>
+    </div>
 
-    <section class="hero">
-        <h1 class="reveal">כשהיא מצליחה מאוד – והוא מתחיל לאבד ביטחון</h1>
-        <p class="reveal delay-1">הצטרפו למפגש פתוח לקהל הרחב ללא עלות, בו נלמד לקרוא בצורה עמוקה ואומנותית את המפה הזוגית שלכם ונגלה מה באמת יוצר יציבות וקרבה.</p>
-        <div class="reveal delay-2">
-            <button class="cta-scroll-btn" onclick="scrollToForm()">הבטיחו את מקומכם במפגש</button>
+    <div class="main-wrapper">
+        
+        <div class="logo-container reveal">
+            <img src="https://www.pulseem.co.il/Pulseem/ClientImages/20175/%D7%99%D7%95%D7%91%D7%9C-%D7%A1%D7%95%D7%93%D7%90%D7%99-PNG.png" alt="יובל סודאי" class="logo-img">
         </div>
-    </section>
 
-    <section class="concept-section">
-        <div class="section-container">
-            <h2 class="section-title reveal">מה נלמד בוובינר "המפה הזוגית"?</h2>
+        <section class="hero reveal delay-1">
+            <div class="date-tag">יום רביעי הקרוב — וובינר פתוח לקהל הרחב</div>
+            <h1>כשהיא מצליחה מאוד – והוא מתחיל לאבד ביטחון: מה באמת מחזיק את הזוגיות?</h1>
+            <p>אני מזמין אתכם להצטרף אלינו, ללמוד את המבנה העמוק של הקשר הזוגי, ולגלות מה באמת יוצר ביטחון, קרבה ויציבות – גם כשהחיים רחוקים מלהיות מושלמים.</p>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title reveal">שני מרכיבים מרכזיים בונים את השלד הזוגי:</h2>
             
-            <div class="grid">
-                <div class="concept-card reveal">
-                    <h3>01. השתדלות ואחריות</h3>
-                    <p>נבין כיצד נוכחות אמיתית ולקיחת אחריות פנימית בתוך הבית משנות לחלוטין את מאזן הכוחות ויוצרות שלד יציב לקשר.</p>
-                </div>
-                
-                <div class="concept-card reveal delay-1">
-                    <h3>02. יציבות פנימית</h3>
-                    <p>איך מפתחים עמוד שדרה רגשי שאינו מתערער אל מול פערי הצלחה, חולשות או פחדים זמניים, ומאפשרים לבן או בת הזוג להישען כשצריך.</p>
-                </div>
+            <div class="info-card reveal">
+                <h3>1. השתדלות ואחריות</h3>
+                <p>שאישה תרגיש שבעלה נוכח, משתדל ולוקח אחריות על מקומו בבית ובמשפחה.</p>
             </div>
-        </div>
-    </section>
-
-    <section class="registration-section" id="registerSection">
-        <div class="form-card reveal">
             
-            <div id="formFields">
-                <h2>טופס הרשמה מהיר</h2>
-                <p class="form-subtitle">מלאו את הפרטים ומקומכם בוובינר המיוחד יישמר באופן מיידי</p>
+            <div class="info-card reveal delay-1">
+                <h3>2. יציבות פנימית</h3>
+                <p>גם כאשר יש חולשות, קשיים או פחדים. אישה זקוקה להרגיש שיש מולה אדם שלא מאבד את הערך העצמי שלו בגלל ההצלחה שלה, ושאפשר להישען עליו כשצריך.</p>
+            </div>
+        </section>
+
+        <section class="form-card reveal">
+            
+            <div id="formContent">
+                <h2>הסדנה החדשה שלנו — "המפה הזוגית"</h2>
+                <p class="subtitle">המפגש הראשון יהיה פתוח לקהל הרחב ויתקיים בוובינר מיוחד ביום רביעי הקרוב. הבטיחו את מקומכם כעת.</p>
                 
-                <form id="webinarForm">
+                <form id="regForm">
                     <div class="form-group">
                         <label for="name">שם מלא</label>
-                        <input type="text" id="name" name="name" required placeholder="ישראל ישראלי">
+                        <input type="text" id="name" name="name" required placeholder="הקלידו שם מלא">
                     </div>
                     
                     <div class="form-group">
                         <label for="email">כתובת אימייל</label>
-                        <input type="email" id="email" name="email" required placeholder="name@example.com" dir="ltr">
+                        <input type="email" id="email" name="email" required placeholder="כתובת לקבלת הקישור למפגש" dir="ltr">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="phone">מספר טלפון (רשות)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="050-0000000" dir="ltr">
-                    </div>
-                    
-                    <button type="submit" id="submitBtn" class="submit-btn">אישור והרשמה לוובינר — ללא עלות</button>
+                    <button type="submit" id="btnSubmit" class="submit-btn">להרשמה למפגש ללא עלות — לחצו כאן</button>
                 </form>
             </div>
 
-            <div id="successView" class="success-view">
-                <div class="success-checkmark">✓</div>
-                <h2>הרשמתך נקלטה בהצלחה!</h2>
-                <p class="form-subtitle" style="font-size: 19px; margin-bottom: 15px;">שמרינו לך מקום בוובינר "המפה הזוגית".</p>
-                <p style="color: var(--color-muted); font-size: 15px;">קישור הכניסה האישי והנחיות התחברות יישלחו לתיבת המייל שלך בסמוך למועד האירוע.</p>
+            <div id="successContent" class="success-box">
+                <div class="success-icon">✓</div>
+                <h2 style="color: var(--brand-dark); margin-bottom: 5px;">נרשמתם בהצלחה!</h2>
+                <p style="font-size: 18px; color: var(--brand-text); margin-bottom: 12px;">שמרנו לכם מקום בוובינר "המפה הזוגית".</p>
+                <p style="font-size: 15.5px; color: var(--brand-text); font-weight: 300;">קישור הכניסה הייחודי למערכת והנחיות התחברות יישלחו לכתובת המייל שלכם בסמוך למועד המפגש ביום רביעי הקרוב. נתראה!</p>
             </div>
 
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>© יובל סודאי — פסיכותרפיסט ומטפל זוגי מוסמך | זוג או פרט</p>
-    </footer>
+        <footer>
+            <p>© יובל סודאי — פסיכותרפיסט ומטפל זוגי מוסמך</p>
+        </footer>
+
+    </div>
 
     <script>
-        // מנגנון אנימציות גלילה (Scroll Reveal)
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+        // הפעלת אנימציות החשיפה בעת גלילה (Scroll Reveal) בצורה חלקה במובייל ובמחשב
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // מפעיל את האנימציה פעם אחת בלבד לחוויה חלקה
                 }
             });
-        }, {
-            threshold: 0.15, // מפעיל את האנימציה כש-15% מהאלמנט נחשף
-            rootMargin: "0px 0px -50px 0px"
-        });
+        }, { threshold: 0.08 });
 
-        revealElements.forEach(element => {
-            revealOnScroll.observe(element);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // גלילה חלקה לטופס בלחיצה על כפתור ההירו
-        function scrollToForm() {
-            document.getElementById('registerSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // ניהול שליחת הטופס ל-Google Sheets
+        // ניהול שליחת המידע ישירות ל-Google Sheets
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz47aZRr16PGQ56qR8N6rGOPOBW-j0tEioDH9oK0nDVrj-umi4B2egXiBnHCo6FGdeEvQ/exec';
-        const form = document.getElementById('webinarForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formFields = document.getElementById('formFields');
-        const successView = document.getElementById('successView');
+        const form = document.getElementById('regForm');
+        const btn = document.getElementById('btnSubmit');
+        const formContent = document.getElementById('formContent');
+        const successContent = document.getElementById('successContent');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'רושם אותך במערכת...';
+            btn.disabled = true;
+            btn.innerText = 'שומר את מקומך בוובינר...';
 
             fetch(scriptURL, { 
                 method: 'POST', 
                 body: new FormData(form),
                 mode: 'no-cors'
             })
-            .then(response => {
-                // מעבר מעוצב למסך ההצלחה
-                formFields.style.display = 'none';
-                successView.style.display = 'block';
+            .then(() => {
+                // מעבר ויזואלי חלק אל מסך ההצלחה
+                formContent.style.display = 'none';
+                successContent.style.display = 'block';
             })
-            .catch(error => {
-                alert('אירעה שגיאה זמנית בחיבור, אנא נסו שנית.');
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'אישור והרשמה לוובינר — ללא עלות';
+            .catch(() => {
+                alert('אירעה שגיאת רשת קלה בתקשורת מול השרת, אנא נסו שוב.');
+                btn.disabled = false;
+                btn.innerText = 'להרשמה למפגש ללא עלות — לחצו כאן';
             });
         });
     </script>
